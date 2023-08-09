@@ -127,14 +127,11 @@ end
 function love.keypressed(key)
     if key == 'escape' then
         love.event.quit()
-
     elseif key == 'enter' or key == 'return' then
         if gameState == 'start' then
+            gameState = 'serve'
+        elseif gameState == 'serve' then
             gameState = 'play'
-        else
-            gameState = 'start'
-
-            ball:reset()
         end
     end
 end
@@ -145,10 +142,19 @@ function love.draw()
     love.graphics.clear(40/255, 45/255, 52/255, 255/255)
     love.graphics.setFont(smallFont)
 
+    displayScore()
+
     if gameState == 'start' then
-        love.graphics.printf('Press enter to start!', 0, 20, VIRTUAL_WIDTH, 'center')
-    else
-        love.graphics.printf('Its show time!', 0, 20, VIRTUAL_WIDTH, 'center')
+        love.graphics.setFont(smallFont)
+        love.graphics.printf('Welcome to SzymPong!', 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf('Enter wcisnij moj panie!', 0, 20, VIRTUAL_WIDTH, 'center')
+    elseif gameState == 'serve' then
+        love.graphics.setFont(smallFont)
+        love.graphics.printf('Teraz ' .. tostring(servingPlayer) .. " serwuje", 
+            0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf('Enter?!', 0, 20, VIRTUAL_WIDTH, 'center')
+    elseif gameState == 'play' then
+        -- Nic się nie wyświetla :))
     end
 
     player1:render()
