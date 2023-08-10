@@ -27,7 +27,7 @@ function love.load()
 
     sounds = {
         ['Paddle_sound'] = love.audio.newSource('sounds/Paddle_sound.wav', 'static'),
-        ['point'] = love.audio.newSource('sound/Point.wav', 'static'),
+        ['point'] = love.audio.newSource('sounds/Point.wav', 'static'),
         ['Wall_Hit'] = love.audio.newSource('sounds/Wall_Hit.wav', 'static')
     }
 
@@ -111,7 +111,7 @@ function love.update(dt)
             servingPlayer = 2
             player1Score = player1Score + 1
             sounds['point']:play()
-            
+
             if player1Score == 5 then
                 winningPlayer = 1
                 gameState = 'done'
